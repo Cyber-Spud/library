@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv='cache-control' content='no-cache'>
+        <meta http-equiv='expires' content='0'>
+        <meta http-equiv='pragma' content='no-cache'>
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+        <title>Book library</title>
+        <link rel="stylesheet" href="style.css"/>
+        <link href="src/picomplete.css" rel="stylesheet" />
+    </head>
+    <body>
+        <header>
+            <h1>The Library</h1>
+        </header>
+        <main id='main-container'>
+            <div id='main-container__info'>
+                <img src="clapper.png">
+                <img src="record.png">
+                <img src="book.png">
+            </div>
+                <div id='main-container__data'>
+                    <p id="auth-text"></p>
+                    <div id="form-container">
+                        <form onsubmit='addAlbumToLibrary();return false' autocomplete="off">
+                            <div>
+                                <input type="text" class="input-text" id="artist" placeholder="artist" autocomplete="off" list="artist-datalist">
+                                <datalist id="artist-datalist">
+                                </datalist>
+                            </div>
+                            <div>
+                                <input type="text" class="input-text" id="album" placeholder="album name" autocomplete="off" list="album-datalist">
+                                <datalist id="album-datalist">
+                                </datalist>
+                            </div>
+                            <input type="number" class="input-text" id="date" placeholder="year">
+                            <div class="picomplete" style="width:300px;">
+                                <input id="demo" type="text" name="language" placeholder="Language" />
+                              </div>
+                            <button type="submit" class="button">CLICK ME</button>
+                        </form>
+                    </div>
+                    <div id="data-container">
+                        <div class="album">
+                            <div class="album__info">
+                                <p class="album-title">Hi Viz</p>
+                                <p class="album-artist">The Presets</p>
+                                <p class="album-year">2018</p>
+                            </div>
+                            <img class="album__image" src="artwork.jpg">
+                        </div>
+                    </div>
+                </div>
+
+        </main>
+        <!-- <footer></footer> -->
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-firestore.js"></script>
+        <script src="src/picomplete.js"></script>
+        <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyC1mB0TKLkmHnL_XXctPLniD2KZgRdwgP4",
+            authDomain: "library-dc008.firebaseapp.com",
+            databaseURL: "https://library-dc008.firebaseio.com",
+            projectId: "library-dc008",
+            storageBucket: "library-dc008.appspot.com",
+            messagingSenderId: "278308428112",
+            appId: "1:278308428112:web:f90d21e8d36f8c9d39b455"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        // Picomplete local data
+
+        
+
+    //     const paut = new PickleComplate({
+    //   data:[{
+    //     value:'Turkey',
+    //     text:'Türkiye'
+    //   },{
+    //     value:'Russia',
+    //     text:'Rusya'
+    //   },{
+    //     value:'Germany',
+    //     text:'Almanya'
+    //   },{
+    //     value:'Italia',
+    //     text:'İtalya'
+    //   },{
+    //     value:'France',
+    //     text:'Fransa'
+    //   }],
+    //   config: {
+    //     type:'local',
+    //     target: '.picomplete',
+    //     clickCallback:(target,node)=>{
+    //       target.value = node.value;
+    //     }
+    //   }
+    // });
+
+    const pc = new PickleComplate({
+      request:{
+        url:'https://musicbrainz.org/ws/2/artist/?query=',
+        type:'GET',
+        value:'name',//target value key
+        text:'name',//target text key
+        params:{
+             exkey:'&limit=5&&fmt=json' //example post parameter
+        }
+      },
+      config: {
+        type:'server',
+        target: '.picomplete',
+        clickCallback:(target,node)=>{
+          target.value = node.value;
+        }
+      }
+    });
+
+        </script>
+        <script type="text/javascript" src="spotify-web-api.js"></script>
+        <script type="text/javascript" src="https://unpkg.com/album-art"></script>
+        <script src="app.js" defer></script>
+        
+    </body>
+</html>
