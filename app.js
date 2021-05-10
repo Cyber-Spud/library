@@ -120,10 +120,16 @@ function albListener() {
     }
 
     for (i in albumSortName) {
+        let albumValue = albumSortName[i]
+
         option = document.createElement("option");
         option.setAttribute('value', albumSortName[i]);
         option.innerHTML = albumSortName[i];
-        
+        option.addEventListener('click', () => {
+            console.log('The click works ' + albumSortName[i])
+            albumInput.value = albumValue;
+            albumSuggestion.innerHTML = ""
+        });
         albumSuggestion.append(option);
     }
 
